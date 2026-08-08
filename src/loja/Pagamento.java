@@ -2,27 +2,27 @@ package loja;
 
 public class Pagamento {
 
-    private int numero;
+    private int numeroPagamento;
     private double valor;
-    private String modalidade;
+    private String modalidadePagamento;
     private String status;
 
     // Construtor
-    public Pagamento(int numero, double valor, String modalidade) {
-        this.numero = numero;
+    public Pagamento(int numeroPagamento, double valor, String modalidadePagamento) {
+        this.numeroPagamento = numeroPagamento;
         this.valor = valor;
-        this.modalidade = modalidade;
+        this.modalidadePagamento = modalidadePagamento;
         this.status = "PENDENTE";
     }
 
     // Getters e Setters
 
-    public int getNumero() {
-        return numero;
+    public int getNumeroPagamento() {
+        return numeroPagamento;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
+    public void setNumeroPagamento(int numeroPagamento) {
+        this.numeroPagamento = numeroPagamento;
     }
 
     public double getValor() {
@@ -33,20 +33,16 @@ public class Pagamento {
         this.valor = valor;
     }
 
-    public String getModalidade() {
-        return modalidade;
+    public String getModalidadePagamento() {
+        return modalidadePagamento;
     }
 
-    public void setModalidade(String modalidade) {
-        this.modalidade = modalidade;
+    public void setModalidadePagamento(String modalidadePagamento) {
+        this.modalidadePagamento = modalidadePagamento;
     }
 
     public String getStatus() {
         return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
     }
 
     // Realiza o pagamento
@@ -57,25 +53,23 @@ public class Pagamento {
             return false;
         }
 
-        if (modalidade == null || modalidade.trim().isEmpty()) {
+        if (modalidadePagamento == null || modalidadePagamento.trim().isEmpty()) {
             System.out.println("Erro: informe uma modalidade de pagamento.");
             return false;
         }
 
         status = "APROVADO";
 
-        System.out.println("Pagamento realizado com sucesso!");
-
         return true;
     }
 
-    // Exibe os dados do pagamento
+    // Mostra os dados do pagamento
     public void mostrarPagamento() {
+
         System.out.println("===== DADOS DO PAGAMENTO =====");
-        System.out.println("Número: " + numero);
+        System.out.println("Número do pagamento: " + numeroPagamento);
         System.out.printf("Valor: R$ %.2f%n", valor);
-        System.out.println("Modalidade: " + modalidade);
+        System.out.println("Modalidade: " + modalidadePagamento);
         System.out.println("Status: " + status);
     }
 }
-

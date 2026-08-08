@@ -6,39 +6,36 @@ import java.util.Scanner;
 public class Loja {
 
     private ArrayList<Funcionario> funcionarios;
-    private ArrayList<Caixa> caixas;
     private ArrayList<Pagamento> pagamentos;
 
     // Construtor
     public Loja() {
         funcionarios = new ArrayList<>();
-        caixas = new ArrayList<>();
         pagamentos = new ArrayList<>();
     }
 
-    // Cadastra um funcionário
-    public void cadastrarFuncionario(Funcionario funcionario) {
+    // Cadastra um funcionário na lista
+    public boolean adicionarFuncionario(Funcionario funcionario) {
+
+        // Verifica se já existe funcionário com o mesmo ID
+        for (Funcionario f : funcionarios) {
+            if (f.getId() == funcionario.getId()) {
+                System.out.println("Erro: já existe um funcionário com esse ID.");
+                return false;
+            }
+        }
+
         funcionarios.add(funcionario);
         System.out.println("Funcionário cadastrado com sucesso!");
-    }
 
-    // Cadastra um caixa
-    public void cadastrarCaixa(Caixa caixa) {
-        caixas.add(caixa);
-        System.out.println("Caixa cadastrado com sucesso!");
-    }
-
-    // Cadastra um pagamento
-    public void cadastrarPagamento(Pagamento pagamento) {
-        pagamentos.add(pagamento);
-        System.out.println("Pagamento registrado com sucesso!");
+        return true;
     }
 
     // Lista todos os funcionários
     public void listarFuncionarios() {
 
         if (funcionarios.isEmpty()) {
-            System.out.println("Nenhum funcionário cadastrado.");
+            System.out.println("Não existem funcionários cadastrados.");
             return;
         }
 
@@ -50,31 +47,20 @@ public class Loja {
         }
     }
 
-    // Lista todos os caixas
-    public void listarCaixas() {
-
-        if (caixas.isEmpty()) {
-            System.out.println("Nenhum caixa cadastrado.");
-            return;
-        }
-
-        System.out.println("\n===== CAIXAS CADASTRADOS =====");
-
-        for (Caixa caixa : caixas) {
-            caixa.mostrarDados();
-            System.out.println();
-        }
+    // Cadastra um pagamento
+    public void adicionarPagamento(Pagamento pagamento) {
+        pagamentos.add(pagamento);
     }
 
     // Lista todos os pagamentos
     public void listarPagamentos() {
 
         if (pagamentos.isEmpty()) {
-            System.out.println("Nenhum pagamento registrado.");
+            System.out.println("Não existem pagamentos cadastrados.");
             return;
         }
 
-        System.out.println("\n===== PAGAMENTOS REGISTRADOS =====");
+        System.out.println("\n===== PAGAMENTOS REALIZADOS =====");
 
         for (Pagamento pagamento : pagamentos) {
             pagamento.mostrarPagamento();
@@ -85,108 +71,99 @@ public class Loja {
     // Menu principal
     public void executar() {
 
-        Scanner scanner = new Scanner(System.in);
+        Scanner leia = new Scanner(System.in);
 
         int opcao;
 
         do {
+
             System.out.println("\n=================================");
-            System.out.println("       SISTEMA DE PAGAMENTOS");
+            System.out.println("       SISTEMA DA LOJA");
             System.out.println("=================================");
-            System.out.println("1 - Cadastrar Funcionário");
-            System.out.println("2 - Cadastrar Caixa");
+            System.out.println("1 - Cadastrar Gerente");
+            System.out.println("2 - Cadastrar Operador de Caixa");
             System.out.println("3 - Realizar Pagamento");
             System.out.println("4 - Listar Funcionários");
-            System.out.println("5 - Listar Caixas");
-            System.out.println("6 - Listar Pagamentos");
-            System.out.println("7 - Sair");
+            System.out.println("5 - Listar Pagamentos");
+            System.out.println("6 - Sair");
             System.out.println("=================================");
             System.out.print("Escolha uma opção: ");
 
-            opcao = scanner.nextInt();
-            scanner.nextLine();
+            opcao = leia.nextInt();
+            leia.nextLine();
 
             switch (opcao) {
 
                 case 1:
 
-                    System.out.println("\n===== CADASTRO DE FUNCIONÁRIO =====");
+                    System.out.println("\n===== CADASTRO DE GERENTE =====");
 
                     System.out.print("ID: ");
-                    int idFuncionario = scanner.nextInt();
-                    scanner.nextLine();
+                    int idGerente = leia.nextInt();
+                    leia.nextLine();
 
                     System.out.print("Nome: ");
-                    String nome = scanner.nextLine();
+                    String nomeGerente = leia.nextLine();
 
                     System.out.print("CPF: ");
-                    String cpf = scanner.nextLine();
+                    String cpfGerente = leia.nextLine();
 
                     System.out.print("Salário: ");
-                    double salario = scanner.nextDouble();
-                    scanner.nextLine();
+                    double salarioGerente = leia.nextDouble();
+                    leia.nextLine();
 
-                    System.out.print("Cargo: ");
-                    String cargo = scanner.nextLine();
+                    System.out.print("Setor: ");
+                    String setor = leia.nextLine();
 
-                    Funcionario funcionario = new Funcionario(
-                            idFuncionario,
-                            nome,
-                            cpf,
-                            salario,
-                            cargo
+                    System.out.print("Bônus: ");
+                    double bonus = leia.nextDouble();
+                    leia.nextLine();
+
+                    Gerente gerente = new Gerente(
+                            idGerente,
+                            nomeGerente,
+                            cpfGerente,
+                            salarioGerente,
+                            "Gerente",
+                            setor,
+                            bonus
                     );
 
-                    cadastrarFuncionario(funcionario);
+                    adicionarFuncionario(gerente);
+
                     break;
 
                 case 2:
 
-                    if (funcionarios.isEmpty()) {
-                        System.out.println(
-                                "É necessário cadastrar um funcionário antes de cadastrar um caixa."
-                        );
-                        break;
-                    }
+                    System.out.println("\n===== CADASTRO DE OPERADOR DE CAIXA =====");
 
-                    System.out.println("\n===== CADASTRO DE CAIXA =====");
+                    System.out.print("ID: ");
+                    int idOperador = leia.nextInt();
+                    leia.nextLine();
 
-                    System.out.println("\nFuncionários disponíveis:");
+                    System.out.print("Nome: ");
+                    String nomeOperador = leia.nextLine();
 
-                    for (Funcionario f : funcionarios) {
-                        System.out.println(
-                                "ID: " + f.getId()
-                                + " | Nome: " + f.getNome()
-                        );
-                    }
+                    System.out.print("CPF: ");
+                    String cpfOperador = leia.nextLine();
 
-                    System.out.print("Digite o ID do operador: ");
-                    int idOperador = scanner.nextInt();
+                    System.out.print("Salário: ");
+                    double salarioOperador = leia.nextDouble();
 
-                    Funcionario operador = null;
+                    System.out.print("Número do Caixa: ");
+                    int numeroCaixa = leia.nextInt();
+                    leia.nextLine();
 
-                    for (Funcionario f : funcionarios) {
-                        if (f.getId() == idOperador) {
-                            operador = f;
-                            break;
-                        }
-                    }
+                    OperadorCaixa operador = new OperadorCaixa(
+                            idOperador,
+                            nomeOperador,
+                            cpfOperador,
+                            salarioOperador,
+                            "Operador de Caixa",
+                            numeroCaixa
+                    );
 
-                    if (operador == null) {
-                        System.out.println("Funcionário não encontrado.");
-                        break;
-                    }
-
-                    Caixa caixa = new Caixa(operador);
-
-                    cadastrarCaixa(caixa);
-
-                    System.out.println("Deseja abrir o caixa agora? (S/N)");
-                    String abrir = scanner.next();
-
-                    if (abrir.equalsIgnoreCase("S")) {
-                        caixa.abrirCaixa();
-                    }
+                    adicionarFuncionario(operador);
 
                     break;
 
@@ -195,53 +172,57 @@ public class Loja {
                     System.out.println("\n===== REALIZAR PAGAMENTO =====");
 
                     System.out.print("Número do pagamento: ");
-                    int numero = scanner.nextInt();
+                    int numeroPagamento = leia.nextInt();
 
-                    System.out.print("Valor da venda: ");
-                    double valor = scanner.nextDouble();
-                    scanner.nextLine();
+                    System.out.print("Valor: ");
+                    double valor = leia.nextDouble();
+                    leia.nextLine();
 
                     System.out.print("Modalidade de pagamento: ");
-                    String modalidade = scanner.nextLine();
+                    String modalidade = leia.nextLine();
 
                     Pagamento pagamento = new Pagamento(
-                            numero,
+                            numeroPagamento,
                             valor,
                             modalidade
                     );
 
                     if (pagamento.realizarPagamento()) {
-                        cadastrarPagamento(pagamento);
+                        adicionarPagamento(pagamento);
+                        System.out.println("Pagamento realizado com sucesso!");
                     }
 
                     break;
 
                 case 4:
+
                     listarFuncionarios();
+
                     break;
 
                 case 5:
-                    listarCaixas();
+
+                    listarPagamentos();
+
                     break;
 
                 case 6:
-                    listarPagamentos();
-                    break;
 
-                case 7:
-                    System.out.println("\nSistema encerrado.");
+                    System.out.println("Sistema encerrado. Até logo!");
+
                     break;
 
                 default:
-                    System.out.println("Opção inválida.");
+
+                    System.out.println("Opção inválida. Tente novamente.");
             }
 
-        } while (opcao != 7);
+        } while (opcao != 6);
 
-        scanner.close();
+        leia.close();
     }
 
-    // Main
+    // Método principal
     public static void main(String[] args) {
 
         Loja loja = new Loja();
@@ -249,4 +230,3 @@ public class Loja {
         loja.executar();
     }
 }
-

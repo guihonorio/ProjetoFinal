@@ -1,6 +1,6 @@
 package loja;
 
-public class Funcionario {
+public abstract class Funcionario {
 
     private int id;
     private String nome;
@@ -59,7 +59,7 @@ public class Funcionario {
         this.cargo = cargo;
     }
 
-    // Exibe os dados do funcionário
+    // Mostra os dados do funcionário
     public void mostrarDados() {
         System.out.println("===== DADOS DO FUNCIONÁRIO =====");
         System.out.println("ID: " + id);
@@ -69,4 +69,3 @@ public class Funcionario {
         System.out.println("Cargo: " + cargo);
     }
 }
-
