@@ -8,34 +8,31 @@ public class Loja {
     private ArrayList<Funcionario> funcionarios;
     private ArrayList<Pagamento> pagamentos;
 
-    // Construtor
     public Loja() {
         funcionarios = new ArrayList<>();
         pagamentos = new ArrayList<>();
     }
+    
+    // Funcionarios
 
-    // Cadastra um funcionário na lista
-    public boolean adicionarFuncionario(Funcionario funcionario) {
+    public void adicionarFuncionario(Funcionario funcionario) {
 
-        // Verifica se já existe funcionário com o mesmo ID
         for (Funcionario f : funcionarios) {
+
             if (f.getId() == funcionario.getId()) {
                 System.out.println("Erro: já existe um funcionário com esse ID.");
-                return false;
+                return;
             }
         }
 
         funcionarios.add(funcionario);
         System.out.println("Funcionário cadastrado com sucesso!");
-
-        return true;
     }
 
-    // Lista todos os funcionários
     public void listarFuncionarios() {
 
         if (funcionarios.isEmpty()) {
-            System.out.println("Não existem funcionários cadastrados.");
+            System.out.println("Nenhum funcionário cadastrado.");
             return;
         }
 
@@ -47,20 +44,23 @@ public class Loja {
         }
     }
 
-    // Cadastra um pagamento
+    // Pagamentos
+
     public void adicionarPagamento(Pagamento pagamento) {
+
         pagamentos.add(pagamento);
+
+        System.out.println("Pagamento registrado com sucesso!");
     }
 
-    // Lista todos os pagamentos
     public void listarPagamentos() {
 
         if (pagamentos.isEmpty()) {
-            System.out.println("Não existem pagamentos cadastrados.");
+            System.out.println("Nenhum pagamento cadastrado.");
             return;
         }
 
-        System.out.println("\n===== PAGAMENTOS REALIZADOS =====");
+        System.out.println("\n===== PAGAMENTOS REGISTRADOS =====");
 
         for (Pagamento pagamento : pagamentos) {
             pagamento.mostrarPagamento();
@@ -68,8 +68,9 @@ public class Loja {
         }
     }
 
-    // Menu principal
-    public void executar() {
+    // Menu
+
+    public void iniciar() {
 
         Scanner leia = new Scanner(System.in);
 
@@ -77,16 +78,13 @@ public class Loja {
 
         do {
 
-            System.out.println("\n=================================");
-            System.out.println("       SISTEMA DA LOJA");
-            System.out.println("=================================");
+            System.out.println("\n===== BEM VINDO AO PDV =====");
             System.out.println("1 - Cadastrar Gerente");
             System.out.println("2 - Cadastrar Operador de Caixa");
             System.out.println("3 - Realizar Pagamento");
             System.out.println("4 - Listar Funcionários");
             System.out.println("5 - Listar Pagamentos");
             System.out.println("6 - Sair");
-            System.out.println("=================================");
             System.out.print("Escolha uma opção: ");
 
             opcao = leia.nextInt();
@@ -95,126 +93,31 @@ public class Loja {
             switch (opcao) {
 
                 case 1:
-
-                    System.out.println("\n===== CADASTRO DE GERENTE =====");
-
-                    System.out.print("ID: ");
-                    int idGerente = leia.nextInt();
-                    leia.nextLine();
-
-                    System.out.print("Nome: ");
-                    String nomeGerente = leia.nextLine();
-
-                    System.out.print("CPF: ");
-                    String cpfGerente = leia.nextLine();
-
-                    System.out.print("Salário: ");
-                    double salarioGerente = leia.nextDouble();
-                    leia.nextLine();
-
-                    System.out.print("Setor: ");
-                    String setor = leia.nextLine();
-
-                    System.out.print("Bônus: ");
-                    double bonus = leia.nextDouble();
-                    leia.nextLine();
-
-                    Gerente gerente = new Gerente(
-                            idGerente,
-                            nomeGerente,
-                            cpfGerente,
-                            salarioGerente,
-                            "Gerente",
-                            setor,
-                            bonus
-                    );
-
-                    adicionarFuncionario(gerente);
-
+                    cadastrarGerente(leia);
                     break;
 
                 case 2:
-
-                    System.out.println("\n===== CADASTRO DE OPERADOR DE CAIXA =====");
-
-                    System.out.print("ID: ");
-                    int idOperador = leia.nextInt();
-                    leia.nextLine();
-
-                    System.out.print("Nome: ");
-                    String nomeOperador = leia.nextLine();
-
-                    System.out.print("CPF: ");
-                    String cpfOperador = leia.nextLine();
-
-                    System.out.print("Salário: ");
-                    double salarioOperador = leia.nextDouble();
-
-                    System.out.print("Número do Caixa: ");
-                    int numeroCaixa = leia.nextInt();
-                    leia.nextLine();
-
-                    OperadorCaixa operador = new OperadorCaixa(
-                            idOperador,
-                            nomeOperador,
-                            cpfOperador,
-                            salarioOperador,
-                            "Operador de Caixa",
-                            numeroCaixa
-                    );
-
-                    adicionarFuncionario(operador);
-
+                    cadastrarOperadorCaixa(leia);
                     break;
 
                 case 3:
-
-                    System.out.println("\n===== REALIZAR PAGAMENTO =====");
-
-                    System.out.print("Número do pagamento: ");
-                    int numeroPagamento = leia.nextInt();
-
-                    System.out.print("Valor: ");
-                    double valor = leia.nextDouble();
-                    leia.nextLine();
-
-                    System.out.print("Modalidade de pagamento: ");
-                    String modalidade = leia.nextLine();
-
-                    Pagamento pagamento = new Pagamento(
-                            numeroPagamento,
-                            valor,
-                            modalidade
-                    );
-
-                    if (pagamento.realizarPagamento()) {
-                        adicionarPagamento(pagamento);
-                        System.out.println("Pagamento realizado com sucesso!");
-                    }
-
+                    realizarPagamento(leia);
                     break;
 
                 case 4:
-
                     listarFuncionarios();
-
                     break;
 
                 case 5:
-
                     listarPagamentos();
-
                     break;
 
                 case 6:
-
-                    System.out.println("Sistema encerrado. Até logo!");
-
+                    System.out.println("Sistema encerrado.");
                     break;
 
                 default:
-
-                    System.out.println("Opção inválida. Tente novamente.");
+                    System.out.println("Opção inválida.");
             }
 
         } while (opcao != 6);
@@ -222,11 +125,328 @@ public class Loja {
         leia.close();
     }
 
-    // Método principal
-    public static void main(String[] args) {
+    // Cadastro gerente
 
-        Loja loja = new Loja();
+    private void cadastrarGerente(Scanner leia) {
 
-        loja.executar();
+        System.out.println("\n===== CADASTRO DE GERENTE =====");
+
+        System.out.print("ID: ");
+        int id = leia.nextInt();
+        leia.nextLine();
+
+        System.out.print("Nome: ");
+        String nome = leia.nextLine();
+
+        System.out.print("CPF: ");
+        String cpf = leia.nextLine();
+
+        System.out.print("Salário: ");
+        double salario = leia.nextDouble();
+        leia.nextLine();
+
+        System.out.print("Setor: ");
+        String setor = leia.nextLine();
+
+        System.out.print("Bônus: ");
+        double bonus = leia.nextDouble();
+        leia.nextLine();
+
+        Gerente gerente = new Gerente(
+                id,
+                nome,
+                cpf,
+                salario,
+                "Gerente",
+                setor,
+                bonus
+        );
+
+        adicionarFuncionario(gerente);
+    }
+
+    // Cadastro operador
+
+    private void cadastrarOperadorCaixa(Scanner leia) {
+
+        System.out.println("\n===== CADASTRO DE OPERADOR DE CAIXA =====");
+
+        System.out.print("ID: ");
+        int id = leia.nextInt();
+        leia.nextLine();
+
+        System.out.print("Nome: ");
+        String nome = leia.nextLine();
+
+        System.out.print("CPF: ");
+        String cpf = leia.nextLine();
+
+        System.out.print("Salário: ");
+        double salario = leia.nextDouble();
+        leia.nextLine();
+
+        System.out.print("Número do Caixa: ");
+        int numeroCaixa = leia.nextInt();
+        leia.nextLine();
+
+        OperadorCaixa operador = new OperadorCaixa(
+                id,
+                nome,
+                cpf,
+                salario,
+                "Operador de Caixa",
+                numeroCaixa
+        );
+
+        adicionarFuncionario(operador);
+    }
+
+    // Realizar pagamento
+
+    private void realizarPagamento(Scanner leia) {
+
+        System.out.println("\n===== FORMA DE PAGAMENTO =====");
+        System.out.println("1 - PIX");
+        System.out.println("2 - Boleto");
+        System.out.println("3 - Cartão");
+        System.out.print("Escolha uma opção: ");
+
+        int opcao = leia.nextInt();
+        leia.nextLine();
+
+        switch (opcao) {
+
+            case 1:
+                realizarPix(leia);
+                break;
+
+            case 2:
+                realizarBoleto(leia);
+                break;
+
+            case 3:
+                realizarCartao(leia);
+                break;
+
+            default:
+                System.out.println("Opção inválida.");
+        }
+    }
+
+    // PIX
+
+    private void realizarPix(Scanner leia) {
+
+        System.out.println("\n===== PAGAMENTO PIX =====");
+
+        System.out.print("Número do pagamento: ");
+        int numero = leia.nextInt();
+
+        System.out.print("Valor: ");
+        double valor = leia.nextDouble();
+        leia.nextLine();
+
+        System.out.print("Chave PIX: ");
+        String chavePix = leia.nextLine();
+
+        Pix pix = new Pix(numero, valor, chavePix);
+
+        if (pix.realizarPagamento()) {
+
+            adicionarPagamento(pix);
+
+            System.out.println("\nPagamento aprovado!");
+            pix.mostrarPagamento();
+        }
+    }
+
+    // boleto
+
+    private void realizarBoleto(Scanner leia) {
+
+        System.out.println("\n===== PAGAMENTO POR BOLETO =====");
+
+        System.out.print("Número do pagamento: ");
+        int numero = leia.nextInt();
+
+        System.out.print("Valor: ");
+        double valor = leia.nextDouble();
+        leia.nextLine();
+
+        System.out.print("Código de barras: ");
+        String codigoBarras = leia.nextLine();
+
+        Boleto boleto = new Boleto(
+                numero,
+                valor,
+                codigoBarras
+        );
+
+        if (boleto.realizarPagamento()) {
+
+            adicionarPagamento(boleto);
+
+            System.out.println("\nPagamento aprovado!");
+            boleto.mostrarPagamento();
+        }
+    }
+
+    // cartao
+
+    private void realizarCartao(Scanner leia) {
+
+        System.out.println("\n===== TIPO DE CARTÃO =====");
+        System.out.println("1 - Débito");
+        System.out.println("2 - Crédito");
+        System.out.print("Escolha uma opção: ");
+
+        int opcao = leia.nextInt();
+        leia.nextLine();
+
+        switch (opcao) {
+
+            case 1:
+                realizarDebito(leia);
+                break;
+
+            case 2:
+                realizarCredito(leia);
+                break;
+
+            default:
+                System.out.println("Opção inválida.");
+        }
+    }
+
+    // cartao debito
+
+    private void realizarDebito(Scanner leia) {
+
+        System.out.println("\n===== PAGAMENTO COM CARTÃO DE DÉBITO =====");
+
+        System.out.print("Número do pagamento: ");
+        int numero = leia.nextInt();
+
+        System.out.print("Valor: ");
+        double valor = leia.nextDouble();
+        leia.nextLine();
+
+        System.out.print("Número do cartão: ");
+        String numeroCartao = leia.nextLine();
+
+        System.out.print("Nome do titular: ");
+        String nomeTitular = leia.nextLine();
+
+        System.out.print("Bandeira: ");
+        String bandeira = leia.nextLine();
+
+        System.out.print("CVV: ");
+        String cvv = leia.nextLine();
+
+        System.out.print("Saldo disponível: ");
+        double saldo = leia.nextDouble();
+        leia.nextLine();
+
+        System.out.print("Senha: ");
+        String senha = leia.nextLine();
+
+        CartaoDebito debito = new CartaoDebito(
+                numero,
+                valor,
+                numeroCartao,
+                nomeTitular,
+                bandeira,
+                cvv,
+                saldo,
+                senha
+        );
+
+        if (debito.realizarPagamento()) {
+
+            adicionarPagamento(debito);
+
+            System.out.println("\nPagamento aprovado!");
+            debito.mostrarPagamento();
+        }
+    }
+
+    // cartao credito
+
+    private void realizarCredito(Scanner leia) {
+
+        System.out.println("\n===== PAGAMENTO COM CARTÃO DE CRÉDITO =====");
+
+        System.out.print("Número do pagamento: ");
+        int numero = leia.nextInt();
+
+        System.out.print("Valor: ");
+        double valor = leia.nextDouble();
+        leia.nextLine();
+
+        System.out.print("Número do cartão: ");
+        String numeroCartao = leia.nextLine();
+
+        System.out.print("Nome do titular: ");
+        String nomeTitular = leia.nextLine();
+
+        System.out.print("Bandeira: ");
+        String bandeira = leia.nextLine();
+
+        System.out.print("CVV: ");
+        String cvv = leia.nextLine();
+
+        System.out.print("Limite disponível: ");
+        double limite = leia.nextDouble();
+        leia.nextLine();
+
+        System.out.println("\n1 - À vista");
+        System.out.println("2 - Parcelado");
+        System.out.print("Escolha uma opção: ");
+
+        int tipoPagamento = leia.nextInt();
+
+        CartaoCredito credito;
+
+        if (tipoPagamento == 1) {
+
+            credito = new CartaoCredito(
+                    numero,
+                    valor,
+                    numeroCartao,
+                    nomeTitular,
+                    bandeira,
+                    cvv,
+                    limite
+            );
+
+        } else if (tipoPagamento == 2) {
+
+            System.out.print("Quantidade de parcelas: ");
+            int parcelas = leia.nextInt();
+
+            credito = new CartaoCredito(
+                    numero,
+                    valor,
+                    numeroCartao,
+                    nomeTitular,
+                    bandeira,
+                    cvv,
+                    limite,
+                    parcelas
+            );
+
+        } else {
+
+            System.out.println("Opção inválida.");
+            return;
+        }
+
+        if (credito.realizarPagamento()) {
+
+            adicionarPagamento(credito);
+
+            System.out.println("\nPagamento aprovado!");
+            credito.mostrarPagamento();
+        }
     }
 }
