@@ -8,7 +8,6 @@ public abstract class Funcionario {
     private double salario;
     private String cargo;
 
-    // Construtor
     public Funcionario(int id, String nome, String cpf, double salario, String cargo) {
         this.id = id;
         this.nome = nome;
@@ -16,8 +15,6 @@ public abstract class Funcionario {
         this.salario = salario;
         this.cargo = cargo;
     }
-
-    // Getters e Setters
 
     public int getId() {
         return id;
@@ -59,7 +56,6 @@ public abstract class Funcionario {
         this.cargo = cargo;
     }
 
-    // Mostra os dados do funcionário
     public void mostrarDados() {
         System.out.println("===== DADOS DO FUNCIONÁRIO =====");
         System.out.println("ID: " + id);

@@ -5,7 +5,6 @@ public class CartaoDebito extends Cartao {
     private double saldoDisponivel;
     private String senha;
 
-    // Construtor
     public CartaoDebito(int numeroPagamento, double valor,
                         String numeroCartao, String nomeTitular,
                         String bandeira, String cvv,
@@ -16,8 +15,6 @@ public class CartaoDebito extends Cartao {
         this.saldoDisponivel = saldoDisponivel;
         this.senha = senha;
     }
-
-    // Getters e Setters
 
     public double getSaldoDisponivel() {
         return saldoDisponivel;
@@ -35,7 +32,6 @@ public class CartaoDebito extends Cartao {
         this.senha = senha;
     }
 
-    // Pagamento
     @Override
     public boolean realizarPagamento() {
 
@@ -65,7 +61,6 @@ public class CartaoDebito extends Cartao {
         return true;
     }
 
-    // Dados do pagamento
     @Override
     public void mostrarPagamento() {
 

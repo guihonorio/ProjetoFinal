@@ -7,7 +7,6 @@ public abstract class Cartao extends Pagamento {
     private String bandeira;
     private String cvv;
 
-    // Construtor
     public Cartao(int numeroPagamento, double valor,
                   String numeroCartao, String nomeTitular,
                   String bandeira, String cvv) {
@@ -19,8 +18,6 @@ public abstract class Cartao extends Pagamento {
         this.bandeira = bandeira;
         this.cvv = cvv;
     }
-
-    // Getters e Setters
 
     public String getNumeroCartao() {
         return numeroCartao;
@@ -54,7 +51,6 @@ public abstract class Cartao extends Pagamento {
         this.cvv = cvv;
     }
 
-    // Validar dados
     protected boolean validarDadosCartao() {
 
         if (numeroCartao == null || numeroCartao.trim().isEmpty()) {
@@ -80,7 +76,6 @@ public abstract class Cartao extends Pagamento {
         return true;
     }
 
-    // Mostra os dados do cartão
     protected void mostrarDadosCartao() {
 
         System.out.println("Número do cartão: " + numeroCartao);

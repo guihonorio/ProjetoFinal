@@ -5,7 +5,7 @@ public class CartaoCredito extends Cartao {
     private double limiteDisponivel;
     private int quantidadeParcelas;
 
-    // pagamento a vista
+
     public CartaoCredito(int numeroPagamento, double valor,
                          String numeroCartao, String nomeTitular,
                          String bandeira, String cvv,
@@ -17,7 +17,6 @@ public class CartaoCredito extends Cartao {
         this.quantidadeParcelas = 1;
     }
 
-    // pagamento parcelado
     public CartaoCredito(int numeroPagamento, double valor,
                          String numeroCartao, String nomeTitular,
                          String bandeira, String cvv,
@@ -29,8 +28,6 @@ public class CartaoCredito extends Cartao {
         this.limiteDisponivel = limiteDisponivel;
         this.quantidadeParcelas = quantidadeParcelas;
     }
-
-    // Getters e Setters
 
     public double getLimiteDisponivel() {
         return limiteDisponivel;
@@ -48,7 +45,6 @@ public class CartaoCredito extends Cartao {
         this.quantidadeParcelas = quantidadeParcelas;
     }
 
-    // Faz o pagamento
     @Override
     public boolean realizarPagamento() {
 
@@ -78,7 +74,6 @@ public class CartaoCredito extends Cartao {
         return true;
     }
 
-    // Dados do pagamento
     @Override
     public void mostrarPagamento() {
 

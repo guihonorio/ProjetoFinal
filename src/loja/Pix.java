@@ -4,13 +4,10 @@ public class Pix extends Pagamento {
 
     private String chavePix;
 
-    // Construtor
     public Pix(int numeroPagamento, double valor, String chavePix) {
         super(numeroPagamento, valor);
         this.chavePix = chavePix;
     }
-
-    // Getter e Setter
 
     public String getChavePix() {
         return chavePix;
@@ -20,7 +17,6 @@ public class Pix extends Pagamento {
         this.chavePix = chavePix;
     }
 
-    // Pagamento via PIX
     @Override
     public boolean realizarPagamento() {
 
@@ -39,7 +35,6 @@ public class Pix extends Pagamento {
         return true;
     }
 
-    // Dados do pagamento
     @Override
     public void mostrarPagamento() {
 

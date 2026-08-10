@@ -4,13 +4,10 @@ public class Boleto extends Pagamento {
 
     private String codigoBarras;
 
-    // Construtor
     public Boleto(int numeroPagamento, double valor, String codigoBarras) {
         super(numeroPagamento, valor);
         this.codigoBarras = codigoBarras;
     }
-
-    // Getter e Setter
 
     public String getCodigoBarras() {
         return codigoBarras;
@@ -20,7 +17,6 @@ public class Boleto extends Pagamento {
         this.codigoBarras = codigoBarras;
     }
 
-    // Pagamento via boleto
     @Override
     public boolean realizarPagamento() {
 
@@ -39,7 +35,6 @@ public class Boleto extends Pagamento {
         return true;
     }
 
-    // Dados do pagamento
     @Override
     public void mostrarPagamento() {
 

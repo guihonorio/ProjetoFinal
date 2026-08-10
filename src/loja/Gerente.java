@@ -5,7 +5,6 @@ public class Gerente extends Funcionario {
     private String setor;
     private double bonus;
 
-    // Construtor
     public Gerente(int id, String nome, String cpf, double salario, String cargo,
                    String setor, double bonus) {
 
@@ -14,8 +13,6 @@ public class Gerente extends Funcionario {
         this.setor = setor;
         this.bonus = bonus;
     }
-
-    // Getters e Setters
 
     public String getSetor() {
         return setor;
@@ -33,7 +30,6 @@ public class Gerente extends Funcionario {
         this.bonus = bonus;
     }
 
-    // Mostra os dados do gerente
     @Override
     public void mostrarDados() {
 

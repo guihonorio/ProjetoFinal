@@ -6,14 +6,11 @@ public abstract class Pagamento {
     private double valor;
     private String status;
 
-    // Construtor
     public Pagamento(int numeroPagamento, double valor) {
         this.numeroPagamento = numeroPagamento;
         this.valor = valor;
         this.status = "PENDENTE";
     }
-
-    // Getters e Setters
 
     public int getNumeroPagamento() {
         return numeroPagamento;
@@ -35,15 +32,12 @@ public abstract class Pagamento {
         return status;
     }
 
-    // Status pagamento
     protected void setStatus(String status) {
         this.status = status;
     }
 
-    // 
     public abstract boolean realizarPagamento();
 
-    //Dados pagamento
     public void mostrarPagamento() {
 
         System.out.println("===== DADOS DO PAGAMENTO =====");

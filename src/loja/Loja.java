@@ -13,8 +13,6 @@ public class Loja {
         pagamentos = new ArrayList<>();
     }
     
-    // Funcionarios
-
     public void adicionarFuncionario(Funcionario funcionario) {
 
         for (Funcionario f : funcionarios) {
@@ -44,8 +42,6 @@ public class Loja {
         }
     }
 
-    // Pagamentos
-
     public void adicionarPagamento(Pagamento pagamento) {
 
         pagamentos.add(pagamento);
@@ -67,8 +63,6 @@ public class Loja {
             System.out.println();
         }
     }
-
-    // Menu
 
     public void iniciar() {
 
@@ -125,8 +119,6 @@ public class Loja {
         leia.close();
     }
 
-    // Cadastro gerente
-
     private void cadastrarGerente(Scanner leia) {
 
         System.out.println("\n===== CADASTRO DE GERENTE =====");
@@ -165,8 +157,6 @@ public class Loja {
         adicionarFuncionario(gerente);
     }
 
-    // Cadastro operador
-
     private void cadastrarOperadorCaixa(Scanner leia) {
 
         System.out.println("\n===== CADASTRO DE OPERADOR DE CAIXA =====");
@@ -201,8 +191,6 @@ public class Loja {
         adicionarFuncionario(operador);
     }
 
-    // Realizar pagamento
-
     private void realizarPagamento(Scanner leia) {
 
         System.out.println("\n===== FORMA DE PAGAMENTO =====");
@@ -233,8 +221,6 @@ public class Loja {
         }
     }
 
-    // PIX
-
     private void realizarPix(Scanner leia) {
 
         System.out.println("\n===== PAGAMENTO PIX =====");
@@ -259,8 +245,6 @@ public class Loja {
             pix.mostrarPagamento();
         }
     }
-
-    // boleto
 
     private void realizarBoleto(Scanner leia) {
 
@@ -291,8 +275,6 @@ public class Loja {
         }
     }
 
-    // cartao
-
     private void realizarCartao(Scanner leia) {
 
         System.out.println("\n===== TIPO DE CARTÃO =====");
@@ -317,8 +299,6 @@ public class Loja {
                 System.out.println("Opção inválida.");
         }
     }
-
-    // cartao debito
 
     private void realizarDebito(Scanner leia) {
 
@@ -369,8 +349,6 @@ public class Loja {
             debito.mostrarPagamento();
         }
     }
-
-    // cartao credito
 
     private void realizarCredito(Scanner leia) {
 
