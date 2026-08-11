@@ -3,15 +3,15 @@ package loja;
 public class OperadorCaixa extends Funcionario {
 
     private int numeroCaixa;
-    private String statusCaixa;
+    private String status;
 
-    public OperadorCaixa(int id, String nome, String cpf, double salario, String cargo,
-                         int numeroCaixa) {
+    public OperadorCaixa(int id, String nome, String cpf, double salario,
+                         String cargo, String senha, int numeroCaixa) {
 
-        super(id, nome, cpf, salario, cargo);
+        super(id, nome, cpf, salario, cargo, senha);
 
         this.numeroCaixa = numeroCaixa;
-        this.statusCaixa = "FECHADO";
+        this.status = "FECHADO";
     }
 
     public int getNumeroCaixa() {
@@ -22,18 +22,32 @@ public class OperadorCaixa extends Funcionario {
         this.numeroCaixa = numeroCaixa;
     }
 
-    public String getStatusCaixa() {
-        return statusCaixa;
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public void abrirCaixa() {
-        statusCaixa = "ABERTO";
-        System.out.println("Caixa " + numeroCaixa + " aberto com sucesso!");
+
+        if (status.equals("FECHADO")) {
+            status = "ABERTO";
+            System.out.println("Caixa aberto com sucesso!");
+        } else {
+            System.out.println("O caixa já está aberto.");
+        }
     }
 
     public void fecharCaixa() {
-        statusCaixa = "FECHADO";
-        System.out.println("Caixa " + numeroCaixa + " fechado com sucesso!");
+
+        if (status.equals("ABERTO")) {
+            status = "FECHADO";
+            System.out.println("Caixa fechado com sucesso!");
+        } else {
+            System.out.println("O caixa já está fechado.");
+        }
     }
 
     @Override
@@ -46,6 +60,6 @@ public class OperadorCaixa extends Funcionario {
         System.out.printf("Salário: R$ %.2f%n", getSalario());
         System.out.println("Cargo: " + getCargo());
         System.out.println("Número do Caixa: " + numeroCaixa);
-        System.out.println("Status do Caixa: " + statusCaixa);
+        System.out.println("Status do Caixa: " + status);
     }
 }
